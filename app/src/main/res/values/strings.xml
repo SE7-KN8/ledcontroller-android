@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Lighting Control</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rgb">RGB</string>
+    <string name="hsv">HSV</string>
+
+    <string name="red">Red: %1$d</string>
+    <string name="green">Green: %1$d</string>
+    <string name="blue">Blue: %1$d</string>
+    <string name="send">Send</string>
+
 </resources>
