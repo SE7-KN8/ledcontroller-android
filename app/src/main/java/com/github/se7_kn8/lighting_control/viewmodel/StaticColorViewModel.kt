@@ -16,9 +16,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.lang.Exception
 
+
 class StaticColorViewModel(state: SavedStateHandle) : ObservableViewModel() {
 
     private val repo = LightingControlRepository()
+
+
+    var isHSV = MutableLiveData<Boolean>(false)
 
     var error = MutableLiveData<Throwable>()
 
@@ -35,21 +39,45 @@ class StaticColorViewModel(state: SavedStateHandle) : ObservableViewModel() {
 
     var androidColor = Transformations.map(color) {
         if (color.value != null) {
-            return@map android.graphics.Color.rgb(color.value!!.r, color.value!!.g, color.value!!.b)
+            return@map color.value!!.toAndroidColor()
         }
         return@map android.graphics.Color.rgb(0, 0, 0)
     }
 
     fun updateRed(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-        color.value = color.value?.changeRed(progress)
+        if (!isHSV.value!!) {
+            color.value = color.value?.changeRed(progress)
+        }
     }
 
     fun updateGreen(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-        color.value = color.value?.changeGreen(progress)
+        if (!isHSV.value!!) {
+            color.value = color.value?.changeGreen(progress)
+        }
     }
 
     fun updateBlue(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-        color.value = color.value?.changeBlue(progress)
+        if (!isHSV.value!!) {
+            color.value = color.value?.changeBlue(progress)
+        }
+    }
+
+    fun updateHue(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+        if (isHSV.value!!) {
+            color.value = color.value?.changeHue(progress)
+        }
+    }
+
+    fun updateSaturation(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+        if (isHSV.value!!) {
+            color.value = color.value?.changeSaturation(progress)
+        }
+    }
+
+    fun updateValue(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+        if (isHSV.value!!) {
+            color.value = color.value?.changeValue(progress)
+        }
     }
 
     fun onSend(view: View) {

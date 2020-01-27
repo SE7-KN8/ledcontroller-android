@@ -7,6 +7,11 @@
     <string name="red">Red: %1$d</string>
     <string name="green">Green: %1$d</string>
     <string name="blue">Blue: %1$d</string>
+
+    <string name="hue">Hue: %1$d°</string>
+    <string name="saturation">Saturation: %1$d%%</string>
+    <string name="value">Value: %1$d%%</string>
+
     <string name="send">Send</string>
 
 </resources>

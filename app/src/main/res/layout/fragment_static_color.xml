@@ -44,6 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:checked="@={viewModel.isHSV}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -65,88 +66,147 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <androidx.appcompat.widget.AppCompatSeekBar
-                android:id="@+id/red_seek"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:max="255"
-                android:onProgressChanged="@{viewModel::updateRed}"
-                android:progress="@{viewModel.color.r}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/color_card" />
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/color_card">
 
-            <TextView
-                android:id="@+id/text_red"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@{@string/red(viewModel.color.r)}"
-                app:layout_constraintTop_toBottomOf="@+id/red_seek"
-                tools:layout_editor_absoluteX="0dp"
-                tools:text="Red: 123" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:visibility="gone"
+                    android:visibility="@{viewModel.isHSV ? android.view.View.GONE : android.view.View.VISIBLE}">
 
-            <androidx.appcompat.widget.AppCompatSeekBar
-                android:id="@+id/green_seek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:max="255"
-                android:onProgressChanged="@{viewModel::updateGreen}"
-                android:progress="@{viewModel.color.g}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_red" />
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:max="255"
+                        android:onProgressChanged="@{viewModel::updateRed}"
+                        android:progress="@{viewModel.color.r}" />
 
-            <TextView
-                android:id="@+id/text_green"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@{@string/green(viewModel.color.g)}"
-                app:layout_constraintTop_toBottomOf="@+id/green_seek"
-                tools:layout_editor_absoluteX="16dp"
-                tools:text="Green: 231" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@{@string/red(viewModel.color.r)}"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:text="Red: 123" />
 
-            <androidx.appcompat.widget.AppCompatSeekBar
-                android:id="@+id/blue_seek"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:max="255"
-                android:onProgressChanged="@{viewModel::updateBlue}"
-                android:progress="@{viewModel.color.b}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_green" />
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:max="255"
+                        android:onProgressChanged="@{viewModel::updateGreen}"
+                        android:progress="@{viewModel.color.g}" />
 
-            <TextView
-                android:id="@+id/text_blue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@{@string/blue(viewModel.color.b)}"
-                app:layout_constraintTop_toBottomOf="@+id/blue_seek"
-                tools:layout_editor_absoluteX="0dp"
-                tools:text="Blue: 213" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@{@string/green(viewModel.color.g)}"
+                        app:layout_constraintTop_toBottomOf="@+id/green_seek"
+                        tools:layout_editor_absoluteX="16dp"
+                        tools:text="Green: 231" />
+
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:max="255"
+                        android:onProgressChanged="@{viewModel::updateBlue}"
+                        android:progress="@{viewModel.color.b}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@{@string/blue(viewModel.color.b)}"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:text="Blue: 213" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{viewModel.isHSV ? android.view.View.VISIBLE : android.view.View.GONE}">
+
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:max="3600"
+                        android:onProgressChanged="@{viewModel::updateHue}"
+                        android:progress="@{viewModel.color.getHue()}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@{@string/hue(viewModel.color.getHue() / 10)}"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:text="Hue: 123°" />
+
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:max="1000"
+                        android:onProgressChanged="@{viewModel::updateSaturation}"
+                        android:progress="@{viewModel.color.getSaturation()}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@{@string/saturation(viewModel.color.getSaturation() / 10)}"
+                        app:layout_constraintTop_toBottomOf="@+id/green_seek"
+                        tools:layout_editor_absoluteX="16dp"
+                        tools:text="Saturation: 55%" />
+
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:max="1000"
+                        android:onProgressChanged="@{viewModel::updateValue}"
+                        android:progress="@{viewModel.color.getColorValue()}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@{@string/value(viewModel.color.getColorValue() / 10)}"
+                        tools:layout_editor_absoluteX="0dp"
+                        tools:text="Value: 55%" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <Button
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:onClick="@{viewModel::onSend}"
                 android:text="@string/send"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_blue" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
