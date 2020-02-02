@@ -12,7 +12,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 typealias ErrorHandler = (t: Throwable) -> Unit
 
-class LightingControlRepository {
+class LightingControlRepository(private val service: LightingControlService) {
 
     class DefaultCallback<T>(private val handler: ErrorHandler, private val callback: (T) -> Unit = { _ -> /*NOP by default*/ }) : Callback<T> {
 
@@ -30,15 +30,15 @@ class LightingControlRepository {
 
     }
 
-
-    private val service = Retrofit.Builder().baseUrl("http://10.0.2.2:8080/control/").addConverterFactory(ScalarsConverterFactory.create()).build()
-        .create(LightingControlService::class.java)
-
     fun getCurrentColor(errorHandler: ErrorHandler): LiveData<Color> {
         val data = MutableLiveData<Color>()
-        service.currentColor().enqueue(DefaultCallback<String>(errorHandler) {
-            data.value = Color(it)
-        })
+        service.currentColor().enqueue(DefaultCallback<String>(errorHandler) { data.value = Color(it) })
+        return data
+    }
+
+    fun getVersion(errorHandler: ErrorHandler): LiveData<String> {
+        val data = MutableLiveData<String>()
+        service.version().enqueue(DefaultCallback<String>(errorHandler) { data.value = it })
         return data
     }
 

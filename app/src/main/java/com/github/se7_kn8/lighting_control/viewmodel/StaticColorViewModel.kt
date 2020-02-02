@@ -17,19 +17,14 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.lang.Exception
 
 
-class StaticColorViewModel(state: SavedStateHandle) : ObservableViewModel() {
-
-    private val repo = LightingControlRepository()
-
+class StaticColorViewModel(private val repository: LightingControlRepository) : ErrorViewModel() {
 
     var isHSV = MutableLiveData<Boolean>(false)
 
-    var error = MutableLiveData<Throwable>()
-
-    private val currentColor = repo.getCurrentColor { error.value = it }
+    private val currentColor = repository.getCurrentColor { error.value = it }
 
 
-    var color = MediatorLiveData<Color>().apply {
+    val color = MediatorLiveData<Color>().apply {
         value = Color(0, 0, 0)
         addSource(currentColor) {
             value = it
@@ -82,7 +77,7 @@ class StaticColorViewModel(state: SavedStateHandle) : ObservableViewModel() {
 
     fun onSend(view: View) {
         if (color.value != null) {
-            repo.setColor(color.value!!) { error.value = it }
+            repository.setColor(color.value!!) { error.value = it }
         }
     }
 
