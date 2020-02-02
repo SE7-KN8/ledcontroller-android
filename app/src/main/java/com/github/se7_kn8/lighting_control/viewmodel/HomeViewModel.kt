@@ -11,7 +11,11 @@ class HomeViewModel(repo: LightingControlRepository) : ErrorViewModel() {
 
     private val currentColor = MediatorLiveData<Color>().apply {
         value = Color(0, 0, 0)
-        addSource(repo.getCurrentColor { error.value = it }) { value = it }
+        val currentColor = repo.getCurrentColor { error.value = it }
+        addSource(currentColor) {
+            value = it
+            removeSource(currentColor)
+        }
     }
 
     var androidColor = Transformations.map(currentColor) {

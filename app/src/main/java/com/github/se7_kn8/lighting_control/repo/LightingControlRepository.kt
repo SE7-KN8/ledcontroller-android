@@ -22,7 +22,11 @@ class LightingControlRepository(private val service: LightingControlService) {
 
         override fun onResponse(call: Call<T>, response: Response<T>) {
             if (response.isSuccessful && response.body() != null) {
-                callback(response.body()!!)
+                try {
+                    callback(response.body()!!)
+                } catch (t: Throwable) {
+                    handler(t)
+                }
             } else {
                 handler(IllegalStateException("Response is invalid"))
             }
@@ -44,6 +48,12 @@ class LightingControlRepository(private val service: LightingControlService) {
 
     fun setColor(color: Color, errorHandler: ErrorHandler) {
         service.setColor(color.toHexString(), 1000).enqueue(DefaultCallback<Unit>(errorHandler))
+    }
+
+    fun resetColor(errorHandler: ErrorHandler): LiveData<Color> {
+        val data = MutableLiveData<Color>()
+        service.reset(1000).enqueue(DefaultCallback<String>(errorHandler) { data.value = Color(it) })
+        return data
     }
 
 }

@@ -81,4 +81,14 @@ class StaticColorViewModel(private val repository: LightingControlRepository) : 
         }
     }
 
+    fun resetColor() {
+        val resetColor = repository.resetColor { error.value = it }
+        color.apply {
+            addSource(resetColor) {
+                value = it
+                removeSource(resetColor)
+            }
+        }
+    }
+
 }
