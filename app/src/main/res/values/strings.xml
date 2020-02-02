@@ -12,6 +12,10 @@
     <string name="saturation">Saturation: %1$d%%</string>
     <string name="value">Value: %1$d%%</string>
 
+    <string name="version">Server-Version: %1$s</string>
+
     <string name="send">Send</string>
+
+    <string name="static_color">Static color</string>
 
 </resources>

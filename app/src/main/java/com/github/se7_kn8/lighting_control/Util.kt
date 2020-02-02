@@ -8,6 +8,6 @@ import com.google.android.material.snackbar.Snackbar
 
 fun makeErrorSnackbar(viewModel: ErrorViewModel, view: View, lifecycleOwner: LifecycleOwner) {
     viewModel.error.observe(lifecycleOwner) {
-        Snackbar.make(view, "Error: ${it.message}", Snackbar.LENGTH_INDEFINITE).setAction(R.string.ok) {}.show()
+        Snackbar.make(view, "Error: ${it.message}", Snackbar.LENGTH_INDEFINITE).setAction(android.R.string.ok) {}.show()
     }
 }

@@ -8,6 +8,9 @@ import retrofit2.http.Query
 interface LightingControlService {
 
     @GET("/control/")
+    fun info(): Call<String>
+
+    @GET("version")
     fun version(): Call<String>
 
     @GET("lighting")
