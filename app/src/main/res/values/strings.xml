@@ -27,5 +27,6 @@
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="save_as_default_desc">Save the current color as default color?</string>
+    <string name="update">Update mode</string>
 
 </resources>

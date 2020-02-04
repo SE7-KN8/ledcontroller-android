@@ -68,4 +68,20 @@ class LightingControlRepository(private val service: LightingControlService) {
         service.setDefaultColor(color.toHexString()).enqueue(DefaultCallback<Unit>(errorHandler))
     }
 
+    fun getModes(errorHandler: ErrorHandler): LiveData<Array<String>> {
+        val data = MutableLiveData<Array<String>>()
+        service.getModes().enqueue(DefaultCallback<String>(errorHandler) { data.value = it.split(", ").toTypedArray() })
+        return data
+    }
+
+    fun setMode(mode: String, errorHandler: ErrorHandler) {
+        service.setMode(mode).enqueue(DefaultCallback<Unit>(errorHandler))
+    }
+
+    fun getMode(errorHandler: ErrorHandler): LiveData<String> {
+        val data = MutableLiveData<String>()
+        service.getCurrentMode().enqueue(DefaultCallback<String>(errorHandler) { data.value = it })
+        return data
+    }
+
 }
