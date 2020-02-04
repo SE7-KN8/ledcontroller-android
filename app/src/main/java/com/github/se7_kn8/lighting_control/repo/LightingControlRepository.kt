@@ -64,4 +64,8 @@ class LightingControlRepository(private val service: LightingControlService) {
         service.stopMode().enqueue(DefaultCallback<Unit>(errorHandler))
     }
 
+    fun saveAsDefault(color: Color, errorHandler: ErrorHandler) {
+        service.setDefaultColor(color.toHexString()).enqueue(DefaultCallback<Unit>(errorHandler))
+    }
+
 }

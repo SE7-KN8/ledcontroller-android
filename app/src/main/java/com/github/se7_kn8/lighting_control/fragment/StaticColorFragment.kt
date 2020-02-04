@@ -2,6 +2,7 @@ package com.github.se7_kn8.lighting_control.fragment
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 
@@ -33,8 +34,15 @@ class StaticColorFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_reset) {
-            viewModel.resetColor()
+        when (item.itemId) {
+            R.id.menu_reset -> viewModel.resetColor()
+            R.id.menu_save_default -> {
+                AlertDialog.Builder(this.requireContext()).setTitle(R.string.save_as_default_desc)
+                    .setPositiveButton(android.R.string.yes) { dialog, _ ->
+                        viewModel.saveAsDefault()
+                        dialog.dismiss()
+                    }.setNegativeButton(android.R.string.no) { dialog, _ -> dialog.dismiss() }.show()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

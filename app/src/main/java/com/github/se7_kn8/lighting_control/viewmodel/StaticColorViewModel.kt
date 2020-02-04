@@ -23,7 +23,6 @@ class StaticColorViewModel(private val repository: LightingControlRepository) : 
 
     private val currentColor = repository.getCurrentColor { error.value = it }
 
-
     val color = MediatorLiveData<Color>().apply {
         value = Color(0, 0, 0)
         addSource(currentColor) {
@@ -88,6 +87,12 @@ class StaticColorViewModel(private val repository: LightingControlRepository) : 
                 value = it
                 removeSource(resetColor)
             }
+        }
+    }
+
+    fun saveAsDefault() {
+        if (color.value != null) {
+            repository.saveAsDefault(color.value!!) { error.value = it }
         }
     }
 

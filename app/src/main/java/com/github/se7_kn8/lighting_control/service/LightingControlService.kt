@@ -22,12 +22,17 @@ interface LightingControlService {
     @POST("lighting")
     fun setColor(@Query("color") color: String, @Query("time") ms: Int): Call<Unit>
 
-
     @POST("lighting/reset")
     fun reset(@Query("time") ms: Int): Call<String>
 
     @POST("lighting/reset")
     fun reset(): Call<String>
+
+    @GET("lighting/default")
+    fun defaultColor(): Call<String>
+
+    @POST("lighting/default")
+    fun setDefaultColor(@Query("color") color: String): Call<Unit>
 
     @GET("lighting/mode")
     fun getCurrentMode(): Call<String>
