@@ -39,9 +39,12 @@ interface LightingControlService {
     fun getModes(): Call<String>
 
     @POST("lighting/mode/start")
-    fun startMode(): Call<String>
+    fun startMode(): Call<Unit>
+
+    @POST("lighting/mode/start")
+    fun startMode(@Query("multiplier") multiplier: Float): Call<Unit>
 
     @POST("lighting/mode/stop")
-    fun stopMode(): Call<String>
+    fun stopMode(): Call<Unit>
 
 }

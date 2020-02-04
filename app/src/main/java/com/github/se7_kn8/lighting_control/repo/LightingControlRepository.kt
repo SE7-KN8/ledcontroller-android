@@ -56,4 +56,12 @@ class LightingControlRepository(private val service: LightingControlService) {
         return data
     }
 
+    fun start(multiplier: Float, errorHandler: ErrorHandler) {
+        service.startMode(multiplier).enqueue(DefaultCallback<Unit>(errorHandler))
+    }
+
+    fun stop(errorHandler: ErrorHandler) {
+        service.stopMode().enqueue(DefaultCallback<Unit>(errorHandler))
+    }
+
 }

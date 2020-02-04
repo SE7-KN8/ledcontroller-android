@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.github.se7_kn8.lighting_control.fragment.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_staticColorFragment"
             app:destination="@id/staticColorFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_homeFragment_to_modeFragment"
+            app:destination="@id/modeFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
@@ -19,4 +27,8 @@
         android:id="@+id/staticColorFragment"
         android:name="com.github.se7_kn8.lighting_control.fragment.StaticColorFragment"
         android:label="StaticColorFragment" />
+    <fragment
+        android:id="@+id/modeFragment"
+        android:name="com.github.se7_kn8.lighting_control.fragment.ModeFragment"
+        android:label="ModeFragment" />
 </navigation>

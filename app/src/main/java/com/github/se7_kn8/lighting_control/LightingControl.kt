@@ -4,6 +4,7 @@ import android.app.Application
 import com.github.se7_kn8.lighting_control.repo.LightingControlRepository
 import com.github.se7_kn8.lighting_control.service.LightingControlService
 import com.github.se7_kn8.lighting_control.viewmodel.HomeViewModel
+import com.github.se7_kn8.lighting_control.viewmodel.ModeViewModel
 import com.github.se7_kn8.lighting_control.viewmodel.StaticColorViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidFileProperties
@@ -18,6 +19,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 val viewModelModule = module {
     viewModel { StaticColorViewModel(get()) }
     viewModel { HomeViewModel(get()) }
+    viewModel { ModeViewModel(get()) }
 }
 
 val repoModule = module {

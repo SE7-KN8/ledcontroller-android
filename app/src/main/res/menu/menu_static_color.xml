@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_reset"
-        android:icon="@drawable/ic_restore_white_24dp"
+        android:icon="@drawable/ic_restore_24dp"
         android:title="@string/reset"
         app:showAsAction="always" />
 

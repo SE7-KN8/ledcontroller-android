@@ -24,8 +24,11 @@ class HomeFragment : Fragment() {
         binding.staticColorClickHandler = View.OnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_staticColorFragment)
         }
+        binding.modeClickHandler = View.OnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_modeFragment)
+        }
         makeErrorSnackbar(viewModel, binding.root, this)
         return binding.root
     }
-
+    
 }

@@ -14,9 +14,14 @@
 
     <string name="version">Server-Version: %1$s</string>
 
+    <string name="speed">Speed: %1$d</string>
+
     <string name="send">Send</string>
 
     <string name="static_color">Static color</string>
     <string name="reset">Reset</string>
+    <string name="modes">Modes</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
 
 </resources>

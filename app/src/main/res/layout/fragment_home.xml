@@ -12,6 +12,11 @@
         <variable
             name="staticColorClickHandler"
             type="android.view.View.OnClickListener" />
+
+        <variable
+            name="modeClickHandler"
+            type="android.view.View.OnClickListener" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,6 +45,7 @@
             tools:text="Server-Version: 1.2.3-snapshot" />
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
@@ -53,12 +59,12 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
             <TextView
+                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
-                style="@style/TextAppearance.AppCompat.Body1"
                 android:gravity="center_vertical"
-                android:text="@string/static_color"/>
+                android:text="@string/static_color" />
 
             <View
                 android:layout_width="50dp"
@@ -66,6 +72,29 @@
                 android:layout_gravity="end"
                 android:background="@{viewModel.androidColor}"
                 tools:background="@color/colorAccent" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{modeClickHandler::onClick}"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/modes" />
 
         </com.google.android.material.card.MaterialCardView>
 
