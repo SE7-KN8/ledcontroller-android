@@ -12,6 +12,7 @@ class ModeViewModel(private val repo: LightingControlRepository) : ErrorViewMode
 
     private val modes = repo.getModes { error.value = it }
 
+    // TODO use this
     val currentMode = repo.getMode { error.value = it }
 
     val currentModes = MediatorLiveData<Array<String>>().apply {

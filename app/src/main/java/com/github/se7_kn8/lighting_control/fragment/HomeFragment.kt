@@ -27,8 +27,11 @@ class HomeFragment : Fragment() {
         binding.modeClickHandler = View.OnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_modeFragment)
         }
+        binding.gpioClickHandler = View.OnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_gpioControlFragment)
+        }
         makeErrorSnackbar(viewModel, binding.root, this)
         return binding.root
     }
-    
+
 }

@@ -2,37 +2,12 @@ package com.github.se7_kn8.lighting_control.repo
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.github.se7_kn8.lighting_control.DefaultCallback
+import com.github.se7_kn8.lighting_control.ErrorHandler
 import com.github.se7_kn8.lighting_control.entity.Color
-import com.github.se7_kn8.lighting_control.service.LightingControlService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
+import com.github.se7_kn8.lighting_control.service.ControlService
 
-typealias ErrorHandler = (t: Throwable) -> Unit
-
-class LightingControlRepository(private val service: LightingControlService) {
-
-    class DefaultCallback<T>(private val handler: ErrorHandler, private val callback: (T) -> Unit = { _ -> /*NOP by default*/ }) : Callback<T> {
-
-        override fun onFailure(call: Call<T>, t: Throwable) {
-            handler(t)
-        }
-
-        override fun onResponse(call: Call<T>, response: Response<T>) {
-            if (response.isSuccessful && response.body() != null) {
-                try {
-                    callback(response.body()!!)
-                } catch (t: Throwable) {
-                    handler(t)
-                }
-            } else {
-                handler(IllegalStateException("Response is invalid"))
-            }
-        }
-
-    }
+class LightingControlRepository(private val service: ControlService) {
 
     fun getCurrentColor(errorHandler: ErrorHandler): LiveData<Color> {
         val data = MutableLiveData<Color>()

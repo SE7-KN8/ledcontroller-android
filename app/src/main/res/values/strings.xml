@@ -28,5 +28,13 @@
     <string name="stop">Stop</string>
     <string name="save_as_default_desc">Save the current color as default color?</string>
     <string name="update">Update mode</string>
+    <string name="gpio_control">GPIO Control</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="high">High/On</string>
+    <string name="low">Low/Off</string>
+    <string name="gpio_number">GPIO Number</string>
+    <string name="gpio_info">Pins have to be Broadcom GPIO Numbers</string>
 
 </resources>

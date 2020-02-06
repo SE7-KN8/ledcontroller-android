@@ -2,19 +2,9 @@ package com.github.se7_kn8.lighting_control.viewmodel
 
 import android.view.View
 import android.widget.SeekBar
-import androidx.annotation.ColorRes
-import androidx.databinding.Bindable
-import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.*
 import com.github.se7_kn8.lighting_control.entity.Color
 import com.github.se7_kn8.lighting_control.repo.LightingControlRepository
-import com.github.se7_kn8.lighting_control.service.LightingControlService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.lang.Exception
 
 
 class StaticColorViewModel(private val repository: LightingControlRepository) : ErrorViewModel() {

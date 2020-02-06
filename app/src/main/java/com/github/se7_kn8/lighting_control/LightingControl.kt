@@ -1,8 +1,10 @@
 package com.github.se7_kn8.lighting_control
 
 import android.app.Application
+import com.github.se7_kn8.lighting_control.repo.GpioControlRepository
 import com.github.se7_kn8.lighting_control.repo.LightingControlRepository
-import com.github.se7_kn8.lighting_control.service.LightingControlService
+import com.github.se7_kn8.lighting_control.service.ControlService
+import com.github.se7_kn8.lighting_control.viewmodel.GpioControlViewModel
 import com.github.se7_kn8.lighting_control.viewmodel.HomeViewModel
 import com.github.se7_kn8.lighting_control.viewmodel.ModeViewModel
 import com.github.se7_kn8.lighting_control.viewmodel.StaticColorViewModel
@@ -20,16 +22,18 @@ val viewModelModule = module {
     viewModel { StaticColorViewModel(get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { ModeViewModel(get()) }
+    viewModel { GpioControlViewModel(get()) }
 }
 
 val repoModule = module {
     single { LightingControlRepository(get()) }
+    single { GpioControlRepository(get()) }
 }
 
 val serviceModule = module {
     single {
         Retrofit.Builder().baseUrl(getProperty<String>("lighting_server_url")).addConverterFactory(ScalarsConverterFactory.create()).build()
-            .create(LightingControlService::class.java)
+            .create(ControlService::class.java)
     }
 }
 

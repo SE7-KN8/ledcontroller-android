@@ -5,10 +5,18 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-interface LightingControlService {
+interface ControlService {
+
+    //////////
+    //Global//
+    //////////
 
     @GET("/control/")
     fun info(): Call<String>
+
+    ////////////
+    //Lighting//
+    ////////////
 
     @GET("version")
     fun version(): Call<String>
@@ -51,5 +59,12 @@ interface LightingControlService {
 
     @POST("lighting/mode/stop")
     fun stopMode(): Call<Unit>
+
+    ////////
+    //GPIO//
+    ////////
+
+    @POST("gpio/write")
+    fun writeGPIOState(@Query("pin") pin: Int, @Query("state") state: String): Call<Unit>
 
 }
