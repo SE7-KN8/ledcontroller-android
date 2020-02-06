@@ -8,7 +8,7 @@ import kotlin.math.pow
 
 class ModeViewModel(private val repo: LightingControlRepository) : ErrorViewModel() {
 
-    var progress = MutableLiveData(4)
+    var progress = MutableLiveData(5)
 
     private val modes = repo.getModes { error.value = it }
 
@@ -23,15 +23,10 @@ class ModeViewModel(private val repo: LightingControlRepository) : ErrorViewMode
     }
     val selectedItem = MediatorLiveData<Int>().apply { value = 0 }
 
-
-    fun setMode(view: View) {
-        if (currentModes.value != null && selectedItem.value != null) {
-            repo.setMode(currentModes.value!![selectedItem.value!!]) { error.value = it }
-        }
-    }
-
     fun start(view: View) {
-        repo.start(2f.pow(progress.value!!.toFloat() - 4f)) { error.value = it }
+        if (currentModes.value != null && selectedItem.value != null) {
+            repo.start(currentModes.value!![selectedItem.value!!], 2f.pow(-(progress.value!!.toFloat() - 5f))) { error.value = it }
+        }
     }
 
     fun stop(view: View) {
